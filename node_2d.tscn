@@ -1,6 +1,226 @@
-[gd_scene load_steps=2 format=3 uid="uid://croufktsr8gve"]
+[gd_scene load_steps=8 format=3 uid="uid://croufktsr8gve"]
 
-[ext_resource type="Script" uid="uid://efnvys5y2vlr" path="res://testScript.cs" id="1_wtcfe"]
+[ext_resource type="Script" uid="uid://dey01cxr5evnp" path="res://MainMenu.cs" id="1_wtcfe"]
+[ext_resource type="Script" uid="uid://dhi5ypfuy3dyl" path="res://SettingsPanel.cs" id="2_0e48y"]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="Theme" id="Theme_wtcfe"]
+default_font_size = 32
+
+[sub_resource type="Animation" id="Animation_0e48y"]
+resource_name = "Show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.9, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_epypp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0hol4"]
+resource_name = "Hide"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.9, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0hol4"]
+_data = {
+&"Hide": SubResource("Animation_0hol4"),
+&"RESET": SubResource("Animation_epypp"),
+&"Show": SubResource("Animation_0e48y")
+}
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="MainMenu" type="CanvasLayer" parent="." node_paths=PackedStringArray("_newGameButton", "_loadGameButton", "_settingsButton", "_galleryButton", "_quitButton", "_settingsPanel")]
+follow_viewport_enabled = true
 script = ExtResource("1_wtcfe")
+_newGameButton = NodePath("MenuContainer/Buttons/NewGame")
+_loadGameButton = NodePath("MenuContainer/Buttons/LoadGame")
+_settingsButton = NodePath("MenuContainer/Buttons/Settings")
+_galleryButton = NodePath("MenuContainer/Buttons/Gallery")
+_quitButton = NodePath("MenuContainer/Buttons/Quit")
+_settingsPanel = NodePath("MenuContainer/SettingsPanel")
+
+[node name="MenuContainer" type="Control" parent="MainMenu"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 80.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_wtcfe")
+
+[node name="Buttons" type="VBoxContainer" parent="MainMenu/MenuContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -1040.0
+offset_right = 300.0
+offset_bottom = 1040.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="NewGame" type="Button" parent="MainMenu/MenuContainer/Buttons"]
+custom_minimum_size = Vector2(330, 100)
+layout_mode = 2
+size_flags_vertical = 0
+text = "New Game"
+icon_alignment = 1
+
+[node name="LoadGame" type="Button" parent="MainMenu/MenuContainer/Buttons"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+size_flags_vertical = 0
+text = "Load Game"
+icon_alignment = 1
+
+[node name="Settings" type="Button" parent="MainMenu/MenuContainer/Buttons"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+size_flags_vertical = 0
+text = "Settings"
+icon_alignment = 1
+
+[node name="Gallery" type="Button" parent="MainMenu/MenuContainer/Buttons"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+size_flags_vertical = 0
+text = "Gallery"
+icon_alignment = 1
+
+[node name="Quit" type="Button" parent="MainMenu/MenuContainer/Buttons"]
+custom_minimum_size = Vector2(250, 400)
+layout_mode = 2
+size_flags_vertical = 0
+text = "Quit"
+icon_alignment = 1
+
+[node name="SettingsPanel" type="Panel" parent="MainMenu/MenuContainer"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 400.0
+script = ExtResource("2_0e48y")
+
+[node name="MainContainer" type="VBoxContainer" parent="MainMenu/MenuContainer/SettingsPanel"]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 601.0
+offset_bottom = 399.0
+
+[node name="Label" type="Label" parent="MainMenu/MenuContainer/SettingsPanel/MainContainer"]
+layout_mode = 2
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/MenuContainer/SettingsPanel/MainContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="FullScreen" type="Label" parent="MainMenu/MenuContainer/SettingsPanel/MainContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "Full Screen"
+
+[node name="CheckBox" type="CheckBox" parent="MainMenu/MenuContainer/SettingsPanel/MainContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MainMenu/MenuContainer/SettingsPanel/MainContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Resolution" type="Label" parent="MainMenu/MenuContainer/SettingsPanel/MainContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Resolution"
+
+[node name="OptionButton" type="OptionButton" parent="MainMenu/MenuContainer/SettingsPanel/MainContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MainMenu/MenuContainer/SettingsPanel/MainContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Sounds" type="Label" parent="MainMenu/MenuContainer/SettingsPanel/MainContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Sound"
+
+[node name="HSlider" type="HSlider" parent="MainMenu/MenuContainer/SettingsPanel/MainContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+max_value = 1000.0
+value = 100.0
+
+[node name="ExitButton" type="Button" parent="MainMenu/MenuContainer/SettingsPanel/MainContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+action_mode = 0
+button_mask = 0
+text = "Exit"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainMenu/MenuContainer/SettingsPanel"]
+libraries = {
+&"": SubResource("AnimationLibrary_0hol4")
+}

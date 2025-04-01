@@ -12,3 +12,5 @@ export_presets.cfg
 
 # Git LFS track (если используете)
 !*.gdignore
+
+.fake
